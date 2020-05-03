@@ -14,6 +14,8 @@ const Example = ({ covid19Stats }) => {
         const newArray = [];
         stats.forEach(dp => {
             // see if country is in array
+            // if(dp.country === 'US' || dp.country === 'China' || dp.country === 'United Kingdom' || dp.country === 'Canada' || dp.country === 'France' || dp.country === 'France') {
+            if(dp.confirmed > 20000) {
             const index = newArray.findIndex((i) => i.name == dp.country);
             if (index == -1) {
                 newArray.push({
@@ -27,6 +29,9 @@ const Example = ({ covid19Stats }) => {
                 newArray[index].confirmed += dp.confirmed
                 newArray[index].recovered += dp.recovered
             }
+        } else {
+            console.log('not working')
+        }
         });
         console.log(newArray);
         return newArray
@@ -34,19 +39,19 @@ const Example = ({ covid19Stats }) => {
     const data = formatData(covid19Stats);
     return (
         <BarChart
-            width={20500}
+            width={1200}
             height={700}
             data={data}
             margin={{
                 top: 5,
-                right: 30,
-                left: 20,
+                right: 50,
+                left: 10,
                 bottom: 5,
             }}
         >
             <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+            <XAxis dataKey="name" stroke="white"/>
+            <YAxis  stroke="white"/>
             <Tooltip />
             <Legend />
             <Bar dataKey="deaths" fill="#8884d8" />
@@ -56,3 +61,4 @@ const Example = ({ covid19Stats }) => {
     );
 };
 export default Example;
+
